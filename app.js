@@ -6,7 +6,6 @@ var uiController = (function() {
     inputValue: ".add__value",
     addBtn: ".add__btn"
   };
-
   return {
     getInput: function() {
       return {
@@ -38,8 +37,17 @@ var uiController = (function() {
       html = html.replace("$$VALUE$$", item.value);
 
       // Бэлтгэсэн HTML ээ DOM руу хийж өгнө.
-      document.querySelector(list).insertAdjacentHTML("beforeend", html);
-    }
+      document.querySelector(list).insertAdjacentHTML("beforeend", html); 
+    },
+    // Мэдээлэл оруулсаны дараа input-ыг цэвэрлэе
+    clearFields: function(){
+      var fields = document.querySelectorAll(DOMstrings.inputDescription + ", " + DOMstrings.inputValue);
+      var fieldsArr = Array.prototype.slice.call(fields);
+      fieldsArr.forEach((elm) => {
+        elm.value = '';
+      });
+      fieldsArr[0].focus();
+    },
   };
 })();
 
@@ -103,7 +111,7 @@ var appController = (function(uiController, financeController) {
   var ctrlAddItem = function() {
     // 1. Оруулах өгөгдлийг дэлгэцээс олж авна.
     var input = uiController.getInput();
-
+    uiController.clearFields();
     // 2. Олж авсан өгөгдлүүдээ санхүүгийн контроллерт дамжуулж тэнд хадгална.
     var item = financeController.addItem(
       input.type,
@@ -117,6 +125,12 @@ var appController = (function(uiController, financeController) {
     // 4. Төсвийг тооцоолно
     // 5. Эцсийн үлдэгдэл, тооцоог дэлгэцэнд гаргана.
   };
+  // Дараагийн input ruu shiljih listenner duusaagui!!!
+  // var nextEventListeners = function() {
+  //   document.addEventListener("keypress", function(event){
+  //     if(event.keyCode === )
+  //   })
+  // }
 
   var setupEventListeners = function() {
     var DOM = uiController.getDOMstrings();
@@ -136,6 +150,7 @@ var appController = (function(uiController, financeController) {
     init: function() {
       console.log("Application started...");
       setupEventListeners();
+      nextEventListeners();
     }
   };
 })(uiController, financeController);
