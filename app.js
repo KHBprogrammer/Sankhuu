@@ -113,15 +113,16 @@ var appController = (function(uiController, financeController) {
     var input = uiController.getInput();
     uiController.clearFields();
     // 2. Олж авсан өгөгдлүүдээ санхүүгийн контроллерт дамжуулж тэнд хадгална.
+
     var item = financeController.addItem(
       input.type,
       input.description,
       input.value
     );
-
     // 3. Олж авсан өгөгдлүүдээ вэб дээрээ тохирох хэсэгт нь гаргана
-    uiController.addListItem(item, input.type);
-
+    if(input.description !== '' && input.value !== '')
+      uiController.addListItem(item, input.type);
+    
     // 4. Төсвийг тооцоолно
     // 5. Эцсийн үлдэгдэл, тооцоог дэлгэцэнд гаргана.
   };
