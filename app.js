@@ -11,7 +11,7 @@ var uiController = (function() {
       return {
         type: document.querySelector(DOMstrings.inputType).value, // exp, inc
         description: document.querySelector(DOMstrings.inputDescription).value,
-        value: document.querySelector(DOMstrings.inputValue).value
+        value: parseInt(document.querySelector(DOMstrings.inputValue).value)
       };
     },
 
@@ -126,12 +126,6 @@ var appController = (function(uiController, financeController) {
     // 4. Төсвийг тооцоолно
     // 5. Эцсийн үлдэгдэл, тооцоог дэлгэцэнд гаргана.
   };
-  // Дараагийн input ruu shiljih listenner duusaagui!!!
-  // var nextEventListeners = function() {
-  //   document.addEventListener("keypress", function(event){
-  //     if(event.keyCode === )
-  //   })
-  // }
 
   var setupEventListeners = function() {
     var DOM = uiController.getDOMstrings();
@@ -151,7 +145,6 @@ var appController = (function(uiController, financeController) {
     init: function() {
       console.log("Application started...");
       setupEventListeners();
-      nextEventListeners();
     }
   };
 })(uiController, financeController);
